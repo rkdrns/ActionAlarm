@@ -1,0 +1,50 @@
+# 코드를 올릴 때마다 GitHub가 APK를 자동으로 만들어
+# 저장소의 "Releases" 에 올려 줍니다. 핸드폰에서 바로 받아 설치하면 됩니다.
+name: APK 만들기
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - uses: android-actions/setup-android@v3
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: APK 빌드
+        run: |
+          chmod +x ./gradlew
+          ./gradlew assembleRelease --no-daemon
+          mkdir -p out
+          cp app/build/outputs/apk/release/app-release.apk out/ActionAlarm.apk
+
+      - name: latest 태그를 이번 빌드로 옮기기
+        run: |
+          git tag -f latest
+          git push -f origin latest
+
+      - name: 최신 APK를 Releases 에 올리기
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: "할일 알람 최신 버전 (빌드 #${{ github.run_number }})"
+          body: |
+            핸드폰에서 아래 **ActionAlarm.apk** 를 눌러 받은 뒤 설치하세요.
+            (처음 한 번은 '출처를 알 수 없는 앱 설치 허용'이 필요합니다)
+          files: out/ActionAlarm.apk
+          make_latest: true
+

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="220dp"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/bg_overlay"
+    android:elevation="8dp"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <TextView
+        android:id="@+id/tvOverlayTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="이 행동을 하셨나요?"
+        android:textColor="#FFD180"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tvOverlayAction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textColor="#E8EAF6"
+        android:textSize="13sp" />
+
+    <Button
+        android:id="@+id/btnOverlayDone"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/success"
+        android:minHeight="0dp"
+        android:text="✔ 완료했어요"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp" />
+</LinearLayout>

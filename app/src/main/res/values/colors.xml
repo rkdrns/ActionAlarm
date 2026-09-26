@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#3D5AFE</color>
+    <color name="primary_dark">#2A3EB1</color>
+    <color name="accent">#FF6D00</color>
+    <color name="alarm_bg">#101426</color>
+    <color name="alarm_card">#1E2440</color>
+    <color name="danger">#E53935</color>
+    <color name="success">#2E7D32</color>
+    <color name="warning_bg">#FFF3E0</color>
+    <color name="warning_text">#E65100</color>
+    <color name="pending_text">#D84315</color>
+    <color name="muted">#8A8FA8</color>
+    <color name="launcher_bg">#3D5AFE</color>
+</resources>

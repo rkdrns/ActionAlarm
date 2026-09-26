@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="24dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="24dp">
+
+        <TimePicker
+            android:id="@+id/timePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:timePickerMode="spinner" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="알람이 울리는 이유"
+            android:textSize="13sp" />
+
+        <EditText
+            android:id="@+id/etReason"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="예) 약 먹을 시간"
+            android:inputType="text"
+            android:maxLines="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="해야 할 행동 (완료할 때까지 확인창이 떠 있어요)"
+            android:textSize="13sp" />
+
+        <EditText
+            android:id="@+id/etAction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="예) 혈압약 1알 복용하기"
+            android:inputType="textMultiLine"
+            android:maxLines="3" />
+
+        <CheckBox
+            android:id="@+id/cbRepeat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="매일 반복" />
+    </LinearLayout>
+</ScrollView>
