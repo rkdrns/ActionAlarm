@@ -1,5 +1,6 @@
 package com.actionalarm.app
 
+import android.app.KeyguardManager
 import android.app.Notification
 import android.app.Service
 import android.content.Context
@@ -77,10 +78,15 @@ class AlarmService : Service() {
         handler.removeCallbacks(autoSilence)
         handler.postDelayed(autoSilence, RING_DURATION_MS)
 
-        // 화면이 켜져 있을 때를 대비해 알람 화면 직접 열기 시도 (안 되면 전체화면 알림이 대신 띄움)
-        try {
-            startActivity(AlarmActivity.intent(this, id))
-        } catch (_: Exception) {
+        // 화면이 켜져 있고 잠금이 풀린 상태에서만 알람 화면을 직접 엶.
+        // (화면이 꺼져 있거나 잠겨 있으면 전체화면 알림이 한 번만 띄움 → 중복으로 뜨는 것 방지)
+        val pm = getSystemService(PowerManager::class.java)
+        val km = getSystemService(KeyguardManager::class.java)
+        if (pm.isInteractive && !km.isKeyguardLocked) {
+            try {
+                startActivity(AlarmActivity.intent(this, id))
+            } catch (_: Exception) {
+            }
         }
     }
 

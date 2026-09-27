@@ -41,6 +41,12 @@ class AlarmActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        alarmId = intent.getIntExtra(EXTRA_ID, -1)
+        // 이미 알람이 꺼졌으면 화면을 그리지도 않고 바로 닫음 (깜빡임 방지)
+        if (shouldCloseImmediately()) {
+            finish()
+            return
+        }
         setShowWhenLocked(true)
         setTurnScreenOn(true)
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
@@ -55,8 +61,6 @@ class AlarmActivity : Activity() {
         tvInfo = findViewById(R.id.tvInfo)
         btnDone = findViewById(R.id.btnDone)
         btnLater = findViewById(R.id.btnLater)
-
-        alarmId = intent.getIntExtra(EXTRA_ID, -1)
 
         btnSilence.setOnClickListener {
             AlarmActions.silence(this, alarmId)
@@ -93,9 +97,17 @@ class AlarmActivity : Activity() {
         super.onPause()
     }
 
+    /**
+     * 작은 확인창을 쓸 수 있는 폰에서는 이 큰 화면은 "울리는 동안"에만 보여줌.
+     * (화면이 꺼져 있다 울린 경우, 늦게 도착한 화면 열기 요청 때문에
+     *  알람을 끈 뒤 이 화면이 다시 뜨는 것을 막음)
+     */
+    private fun shouldCloseImmediately(): Boolean =
+        AlarmService.ringingId != alarmId && Settings.canDrawOverlays(this)
+
     private fun render() {
         val alarm = AlarmStore.get(this, alarmId)
-        if (alarm == null) {
+        if (alarm == null || shouldCloseImmediately()) {
             finish()
             return
         }
