@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
-import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 
@@ -29,8 +28,8 @@ class PendingOverlay(
     private var params: WindowManager.LayoutParams? = null
 
     // 사용자가 옮긴 위치 기억 (서비스가 살아있는 동안)
-    private var posX = dp(12)
-    private var posY = dp(56)
+    private var posX = dp(8)
+    private var posY = dp(40)
 
     fun canShow(): Boolean = Settings.canDrawOverlays(appContext)
 
@@ -44,10 +43,10 @@ class PendingOverlay(
         val inflater = LayoutInflater.from(ctx)
         alarms.forEach { alarm ->
             val card = inflater.inflate(R.layout.overlay_card, r, false)
-            card.findViewById<TextView>(R.id.tvOverlayTitle).text = "⏰ ${alarm.reason}"
-            card.findViewById<TextView>(R.id.tvOverlayAction).text = alarm.action
-            card.findViewById<Button>(R.id.btnOverlayDone).setOnClickListener { onDone(alarm.id) }
-            attachDrag(card.findViewById(R.id.tvOverlayTitle))
+            // 한 줄 질문: "혈압약 1알 복용하기 완료?"  [YES]
+            card.findViewById<TextView>(R.id.tvOverlayQuestion).text = "${alarm.action} 완료?"
+            card.findViewById<View>(R.id.btnOverlayYes).setOnClickListener { onDone(alarm.id) }
+            attachDrag(card.findViewById(R.id.tvOverlayQuestion))
             r.addView(card)
         }
     }
@@ -64,7 +63,10 @@ class PendingOverlay(
     }
 
     private fun create(): LinearLayout? {
-        val r = LinearLayout(ctx).apply { orientation = LinearLayout.VERTICAL }
+        val r = LinearLayout(ctx).apply {
+            orientation = LinearLayout.VERTICAL
+            gravity = android.view.Gravity.END   // 오른쪽 정렬로 쌓기
+        }
         val p = WindowManager.LayoutParams(
             WindowManager.LayoutParams.WRAP_CONTENT,
             WindowManager.LayoutParams.WRAP_CONTENT,
