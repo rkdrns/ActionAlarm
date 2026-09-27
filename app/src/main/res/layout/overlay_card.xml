@@ -1,43 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 한 줄짜리 확인창:  "혈압약 복용 완료?  [YES]" -->
+<!-- 한 줄짜리 확인창:  "혈압약 복용 완료?  [YES]"  (글씨·여백 모두 이전의 약 2/3) -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="4dp"
+    android:layout_marginBottom="3dp"
     android:background="@drawable/bg_overlay"
-    android:elevation="4dp"
+    android:elevation="3dp"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:paddingStart="10dp"
-    android:paddingTop="3dp"
-    android:paddingEnd="3dp"
-    android:paddingBottom="3dp">
+    android:paddingStart="7dp"
+    android:paddingTop="2dp"
+    android:paddingEnd="2dp"
+    android:paddingBottom="2dp">
 
     <TextView
         android:id="@+id/tvOverlayQuestion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ellipsize="end"
-        android:maxWidth="170dp"
+        android:includeFontPadding="false"
+        android:maxWidth="120dp"
         android:maxLines="1"
         android:singleLine="true"
         android:textColor="#FFFFFF"
-        android:textSize="13sp" />
+        android:textSize="9sp" />
 
     <TextView
         android:id="@+id/btnOverlayYes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="5dp"
         android:background="@drawable/bg_yes"
         android:clickable="true"
         android:focusable="false"
-        android:paddingStart="10dp"
+        android:includeFontPadding="false"
+        android:paddingStart="7dp"
         android:paddingTop="3dp"
-        android:paddingEnd="10dp"
+        android:paddingEnd="7dp"
         android:paddingBottom="3dp"
         android:text="YES"
         android:textColor="#FFFFFF"
-        android:textSize="12sp"
+        android:textSize="8sp"
         android:textStyle="bold" />
 </LinearLayout>

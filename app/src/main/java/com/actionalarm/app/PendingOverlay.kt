@@ -28,8 +28,8 @@ class PendingOverlay(
     private var params: WindowManager.LayoutParams? = null
 
     // 사용자가 옮긴 위치 기억 (서비스가 살아있는 동안)
-    private var posX = dp(8)
-    private var posY = dp(40)
+    private var posX = dp(2)    // 오른쪽 끝에 바짝
+    private var posY = dp(21)   // 이전(40dp)보다 약 3mm(19dp) 위
 
     fun canShow(): Boolean = Settings.canDrawOverlays(appContext)
 
